@@ -1,5 +1,4 @@
-# human-motion-prior
-Exploring Versatile Prior for Human Motion via Motion Frequency Guidance (3DV2021)
+## Exploring Versatile Prior for Human Motion via Motion Frequency Guidance
 
 [\[Video Demo\]](https://youtu.be/MLmCq0f-RP8)
 
