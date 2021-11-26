@@ -1,5 +1,7 @@
 ## Exploring Versatile Prior for Human Motion via Motion Frequency Guidance
 
+<p> <img src="teaser.png" width="60%"> </p>
+
 [\[Video Demo\]](https://youtu.be/MLmCq0f-RP8)
 
 
@@ -43,6 +45,8 @@ cd human_motion_prior/train
 sh run_script.sh
 ```
 We train our human motion prior on 4 GTX 1080Ti with batch size 15 per gpu.
+
+You can modify the human_motion_prior/train/motion_prior_defaults.ini for different training setting.
 
 ## Citation
 ```
