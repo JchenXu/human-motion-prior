@@ -39,6 +39,10 @@ human_motion_prior/models
     └── vposer_v1_0
 ```
 
+
+## Data Pre-process
+Follow the instruction [here](human_motion_prior/data/preprocess).
+
 ## Training
 ```bash
 cd human_motion_prior/train
