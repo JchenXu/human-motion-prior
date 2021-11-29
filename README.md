@@ -53,7 +53,7 @@ We train our human motion prior on 4 GTX 1080Ti gpus with batch size 15 per gpu.
 You can modify the human_motion_prior/train/motion_prior_defaults.ini for different training setting.
 
 ## Inference
-You can use the motion prior trained on AMASS to evaluate the VAE reconstruction loss on unseen 3DPW dataset as follows:
+You can use the motion prior trained on AMASS to evaluate the VAE reconstruction loss on unseen [3DPW](https://virtualhumans.mpi-inf.mpg.de/3DPW/) dataset as follows:
 
 ```bash
 cd human_motion_prior/test
