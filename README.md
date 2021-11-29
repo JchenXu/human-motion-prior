@@ -2,7 +2,7 @@
 
 <p> <img src="teaser.png" width="60%"> </p>
 
-[\[Video Demo\]](https://youtu.be/MLmCq0f-RP8)
+[\[Video Demo\]](https://youtu.be/MLmCq0f-RP8) [\[Paper\]](https://arxiv.org/pdf/2111.13074.pdf)
 
 
 ## Installation
@@ -51,6 +51,15 @@ sh run_script.sh 4
 We train our human motion prior on 4 GTX 1080Ti gpus with batch size 15 per gpu.
 
 You can modify the human_motion_prior/train/motion_prior_defaults.ini for different training setting.
+
+## Inference
+You can use the motion prior trained on AMASS to evaluate the VAE reconstruction loss on unseen 3DPW dataset as follows:
+
+```bash
+cd human_motion_prior/test
+export PYTHONPATH=../../
+python test_3dpw.py
+```
 
 ## Citation
 ```

@@ -574,7 +574,6 @@ class MotionPriorTrainer:
         self.logger(
             'Started Training at %s for %d epochs' % (datetime.strftime(starttime, '%Y-%m-%d_%H:%M:%S'), num_epochs))
 
-        vis_bm =  BodyModel(self.ps.bm_path, num_betas=16).to(self.comp_device)
         prev_lr = np.inf
         scheduler = torch.optim.lr_scheduler.StepLR(self.optimizer, step_size=1500, gamma=0.5)
         for epoch_num in range(self.epochs_completed, num_epochs + 1):
@@ -636,9 +635,6 @@ def run_motion_prior_trainer(ps):
     ps.dump_settings(os.path.join(ps.work_dir, 'TR%02d_%s.ini' % (ps.try_num, ps.expr_code)))
 
     vp_trainer.logger(ps.expr_message)
-
-    test_loss_dict = vp_trainer.evaluate(split_name='test')
-    vp_trainer.logger('Final loss on test set is %s' % (' | '.join(['%s = %.2e' % (k, v) for k, v in test_loss_dict.items()])))
 
 if __name__ == '__main__':
     import argparse
