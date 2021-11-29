@@ -4,7 +4,6 @@ import torch
 import numpy as np
 import h5py
 
-frame_num = 30
 fps = 30
 
 def load_smpl_parameters(poses, betas, trans, step):
