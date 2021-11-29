@@ -42,9 +42,9 @@ human_motion_prior/models
 ## Training
 ```bash
 cd human_motion_prior/train
-sh run_script.sh
+sh run_script.sh 4
 ```
-We train our human motion prior on 4 GTX 1080Ti with batch size 15 per gpu.
+We train our human motion prior on 4 GTX 1080Ti gpus with batch size 15 per gpu.
 
 You can modify the human_motion_prior/train/motion_prior_defaults.ini for different training setting.
 
@@ -53,7 +53,7 @@ You can modify the human_motion_prior/train/motion_prior_defaults.ini for differ
 @inproceedings{human_motion_prior,
   title = {Exploring Versatile Prior for Human Motion via Motion Frequency Guidance},
   author = {Jiachen Xu, Min Wang, Jingyu Gong, Wentao Liu, Chen Qian, Yuan Xie, Lizhuang Ma},
-  booktitle = {2021international conference on 3D vision (3DV)},
+  booktitle = {2021 international conference on 3D vision (3DV)},
   year = {2021}
 }
 ```
