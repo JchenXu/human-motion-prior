@@ -91,7 +91,7 @@ if __name__ == '__main__':
     vposer_pt.to(device)
 
     ####################### LOAD PRIOR #######################
-    motion_prior_path = None # path_to_ckpt 
+    motion_prior_path = None # path_to_ckpt
     ini_path = None # path_to_config file .ini
     ps = Configer(default_ps_fname=ini_path)  # This is the default configuration
     motion_prior = MotionPrior(num_neurons=ps.num_neurons, latentD=ps.latentD, latentD_t=ps.latentD_t,
@@ -110,13 +110,11 @@ if __name__ == '__main__':
 
     org_items = loader_3dpw()
     for org_item in tqdm.tqdm(org_items):
-        item = data_prepare(org_item, smpl=smpl, vposer_pt=vposer_pt, block_size=block_size, frequency_num=frequency_num, batch_size=org_item['trans'].shape[0], noise_level=0, trans_convert=True, recomp_p3ds=True)     # for 3dpw
+        item = data_prepare(org_item, smpl=smpl, vposer_pt=vposer_pt, block_size=block_size, frequency_num=frequency_num, batch_size=org_item['trans'].shape[0], noise=False, trans_convert=True, recomp_p3ds=True)     # for 3dpw
         input_trans = item['trans'].reshape(-1, 3)
-        input_pose = item['pose_aa'].reshape(-1, 63)
-        input_rot = item['root_orient_aa_norm'].reshape(-1, 3)
 
         ######################## ENCODE #############################
-        Pin = torch.cat([item['pose_aa'], item['vpose_seq'], item['root_orient_aa_norm'], item['trans'], item['velocity'], item['rvelocity_aa'], item['p3ds']], dim=-1)
+        Pin = torch.cat([item['pose_aa'], item['vpose_seq'], item['root_orient_aa'], item['trans'], item['velocity'], item['rvelocity_aa'], item['p3ds']], dim=-1)
         init_z = motion_prior.encode(Pin, item['frequency'], item['frequency_block'])
         init_z = init_z.mean
 

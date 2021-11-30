@@ -92,7 +92,7 @@ def mpjpe_loss(smpl, local_pose, root_orient, trans, gt_item, add_hand=True):
     trans = trans.reshape(batch_size, 128, 1, 3).detach()
 
     gt_local_pose = gt_item['pose_aa'].reshape(batch_size, 128, 21 * 3).detach()
-    gt_root_orient = gt_item['root_orient_aa'].reshape(batch_size, 128, 3).detach()
+    gt_root_orient = gt_item['root_orient_aa_norm'].reshape(batch_size, 128, 3).detach()
     gt_trans = gt_item['trans'].reshape(batch_size, 128, 1, 3).detach()
 
     p3ds, v3ds = get_p3ds(smpl, local_pose, root_orient, return_vert=True)

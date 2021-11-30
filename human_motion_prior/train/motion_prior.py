@@ -18,7 +18,8 @@ from configer import Configer
 
 from human_motion_prior.tools.omni_tools import copy2cpu as c2c
 from human_motion_prior.tools.omni_tools import log2file, makepath
-from human_motion_prior.tools.training_tools import all_reduce_tensor, get_p3ds
+from human_motion_prior.tools.training_tools import all_reduce_tensor
+from human_motion_prior.tools.evaluation_tools import get_p3ds
 from human_motion_prior.body_model.body_model import BodyModel
 from human_motion_prior.tools.model_loader import load_vposer
 from scipy.spatial.transform import Rotation as R
@@ -351,6 +352,14 @@ class MotionPriorTrainer:
                                         dtype=torch.float32,
                                         device=self.comp_device).repeat([self.ps.batch_size, 1, 1])
 
+        # from human_motion_prior.body_model.smpl_model.smpl import SMPL 
+        # from human_motion_prior.body_model.smpl_model import config
+    
+        # self.smpl = SMPL(config.SMPL_MODEL_DIR,
+        #                  batch_size=self.ps.frame_num * self.ps.batch_size,
+        #                  create_transl=False,
+        #                  gender="MALE").eval().to(self.comp_device)
+
     def data_prepare(self, dorig):
         dorig = {k: dorig[k].to(self.comp_device) for k in ['pose', 'trans', 'p3ds']}  # (B, FRAME_NUM, 156)
         pose_aa = dorig['pose'][:, :, 3:63 + 3]
@@ -425,9 +434,12 @@ class MotionPriorTrainer:
         root_orient_cont_ = MotionPrior.aa2matrot_cont(root_orient_aa_)
         root_orient_cont_ = root_orient_cont_.reshape(self.ps.batch_size, self.ps.frame_num, -1)  # # (B * F, 6)
 
-        # dorig['p3ds'] = get_p3ds(pose_aa, root_orient_aa_, trans, device=self.comp_device)
-        # dorig['p3ds_norm'] = get_p3ds(pose_aa, root_orient_aa_norm, trans, device=self.comp_device)
 
+        # Here you can also generate the joints on-the-fly
+        # dorig['p3ds'] = get_p3ds(self.smpl, pose_aa, root_orient_aa_norm)
+
+        # pre-processed p3ds are global orientation normalized
+        # So, here we add the noise to the yaw-axis of the pre-processed p3ds
         p3ds = dorig['p3ds'].float()
         p3ds = p3ds[:, :, :-2, :] - p3ds[:, :, [0], :]
 
@@ -438,7 +450,9 @@ class MotionPriorTrainer:
         
         p3ds_rot = p3ds_rot.reshape(self.ps.batch_size, 1, 1, 3, 3).repeat([1, self.ps.frame_num, p3ds.shape[2], 1, 1])
         p3ds_rot = p3ds_rot.reshape(self.ps.batch_size * self.ps.frame_num * p3ds.shape[2], 3, 3)
-        p3ds = torch.bmm(p3ds_rot, p3ds.reshape(-1, 3, 1))
+        p3ds = torch.bmm(p3ds_rot, p3ds.reshape(-1, 3, 1))      # add noise to the joints
+
+        #########################################################################3
 
         p3ds_flatten = p3ds.reshape(self.ps.batch_size, self.ps.frame_num, -1)
         frequency_dct = torch.bmm(self.basis, p3ds_flatten)
