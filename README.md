@@ -76,4 +76,4 @@ python test_3dpw.py
 
 
 ## Acknowledgments
-We thank the authors of [VPoser](https://github.com/nghorbani/human_body_prior) for their released code.
+We thank the authors of [VPoser](https://github.com/nghorbani/human_body_prior) for their released code, and this base codes are largely borrowed from them.
