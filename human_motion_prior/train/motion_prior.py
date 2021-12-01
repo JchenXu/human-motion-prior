@@ -154,7 +154,7 @@ class MotionPrior(nn.Module):
         return dis_local
 
     def decode(self, Zin_local, output_type='matrot'):
-        assert output_type in ['matrot', 'aa']
+        assert output_type in ['matrot', 'aa', 'cont']
         Zin = Zin_local
         batch_size = Zin.shape[0]
 
@@ -167,10 +167,16 @@ class MotionPrior(nn.Module):
 
         Xout = self.dropout(Xout)
         Xout_pose = self.bodyprior_dec_pose(torch.cat([Xout, Zin_local], dim=-1)).view([batch_size, self.frame_num, 32])
-        Xout_orient = self.rot_decoder(self.bodyprior_dec_orient(torch.cat([Xout, Zin_local], dim=-1)).view([-1, 6]))
+        Xout_orient_cont = self.bodyprior_dec_orient(torch.cat([Xout, Zin_local], dim=-1)).view([-1, 6])
+        Xout_orient = self.rot_decoder(Xout_orient_cont)
 
-        Xout = torch.cat([Xout_pose,
-                          MotionPrior.matrot2aa(Xout_orient).view([batch_size, self.frame_num, 1 * 3])], dim=-1)
+
+        if output_type == 'cont':
+            Xout = torch.cat([Xout_pose,
+                              Xout_orient_cont.view([batch_size, self.frame_num, 6])], dim=-1)
+        else:
+            Xout = torch.cat([Xout_pose,
+                              MotionPrior.matrot2aa(Xout_orient).view([batch_size, self.frame_num, 1 * 3])], dim=-1)
 
         return Xout
 
