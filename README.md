@@ -64,6 +64,12 @@ export PYTHONPATH=../../
 python test_3dpw.py
 ```
 
+## Application
+- [x] [Human Motion Reconstruction](https://github.com/JchenXu/motion-prior-reconstruction)
+- [ ] Video-based Human Motion Prediction
+- [ ] Motion Infilling
+- [ ] Action Recognition
+
 ## Citation
 ```
 @inproceedings{human_motion_prior,
