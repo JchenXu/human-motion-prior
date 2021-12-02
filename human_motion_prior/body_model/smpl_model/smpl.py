@@ -2,7 +2,7 @@ import torch
 import numpy as np
 import smplx
 from smplx import SMPL as _SMPL
-from smplx.body_models import ModelOutput
+from smplx.body_models import SMPLOutput
 from smplx.lbs import vertices2joints
 
 from human_motion_prior.body_model.smpl_model import config, constants
@@ -28,7 +28,7 @@ class SMPL(_SMPL):
         self.joints = smpl_output.joints
         joints = torch.cat([smpl_output.joints, extra_joints], dim=1)
         joints = joints[:, self.joint_map, :]
-        output = ModelOutput(vertices=smpl_output.vertices,
+        output = SMPLOutput(vertices=smpl_output.vertices,
                              global_orient=smpl_output.global_orient,
                              body_pose=smpl_output.body_pose,
                              joints=joints,
