@@ -68,7 +68,7 @@ python test_3dpw.py
 - [x] [Human Motion Reconstruction](https://github.com/JchenXu/motion-prior-reconstruction)
 - [ ] Video-based Human Motion Prediction
 - [ ] Motion Infilling
-- [x] [Action Recognition]()
+- [x] [Action Recognition](https://github.com/JchenXu/human-motion-prior/tree/main/human_motion_prior/action_recognition)
 
 ## Citation
 ```

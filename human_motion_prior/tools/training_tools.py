@@ -175,15 +175,13 @@ def cal_bone_len(p3ds, kinematic=None):
 
     return real_bonelen
 
-def adapt_3d_np(s3ds, bonelens, parents=None):
+def adapt_3d_np(s3ds, bonelens, parents):
     """
     change bone lengths
     :param s3ds: B x K x 3
     :param bonelens: B x (K-1) x 3
     :return: new_s3d ()
     """
-    if parents is None:
-        parents = MI_PARENT
     bonelens = bonelens.reshape(1, -1, 1).repeat(s3ds.shape[0], axis=0)
     new_s3d = np.zeros_like(s3ds)
     num_joint = new_s3d.shape[1]
