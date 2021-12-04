@@ -44,7 +44,7 @@ Follow the instruction [here](human_motion_prior/data/preprocess).
 
 Note that, because we take the joints as the input to our motion prior, we pre-compute our generated AMASS sequence to generate the global orientation normalized joints sequence and store them for speed. 
 
-You can download the pre-compute joints [here](https://drive.google.com/drive/folders/1vwE1YL9dfs9sGz4qoLlHiQRNiuw-Ka_-?usp=sharing) and put them into human_motion_prior/data. Also, you can generate them on-the-fly by uncommenting [L355-L361](https://github.com/JchenXu/human-motion-prior/blob/main/human_motion_prior/train/motion_prior.py#L355) and [L439](https://github.com/JchenXu/human-motion-prior/blob/main/human_motion_prior/train/motion_prior.py#L439).
+You can download the pre-compute joints [here](https://drive.google.com/drive/folders/1XzIR_CLGr_ly9TjU5hQFFpPtlwjwqTp4?usp=sharing) and put them into human_motion_prior/data. Also, you can generate them on-the-fly by uncommenting [L355-L361](https://github.com/JchenXu/human-motion-prior/blob/main/human_motion_prior/train/motion_prior.py#L355) and [L439](https://github.com/JchenXu/human-motion-prior/blob/main/human_motion_prior/train/motion_prior.py#L439).
 
 ## Training
 ```bash
