@@ -18,7 +18,7 @@ Then, download some checkpoints and human body models, and place them in the hum
 
 Specifically, 
 - Download the pretrained VPoser v1.0 model (2.5 MB) [here](https://smpl-x.is.tue.mpg.de/download.php). 
-- Download the SMPLH model [here](https://mano.is.tue.mpg.de/downloads).
+- Download the SMPLH model [here](https://mano.is.tue.mpg.de).
 - Download the SMPL model [here](http://smpl.is.tue.mpg.de/download.php) for MALE and FEMALE and [here](https://smplify.is.tue.mpg.de/download.php) for NEUTRAL.
 - Download the regressor weights files 1) *J_regressor_h36m.npy* and 2) *J_regressor_extra.npy* [here](http://visiondata.cis.upenn.edu/spin/data.tar.gz).
 
